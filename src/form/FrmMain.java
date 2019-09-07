@@ -5,17 +5,28 @@
  */
 package form;
 
+import domain.User;
+import session.Session;
+import controler.Controller;
+
 /**
  *
  * @author stevokv
  */
 public class FrmMain extends javax.swing.JFrame {
 
+    private Controller controller;
     /**
      * Creates new form FrmMain
      */
     public FrmMain() {
         initComponents();
+        populateCurrentUser();
+    }
+    
+    public FrmMain(Controller controller){
+        this();
+        this.controller = controller;
     }
 
     /**
@@ -27,17 +38,64 @@ public class FrmMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelUser = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblCurrentUser = new javax.swing.JLabel();
+        jmbMainMenu = new javax.swing.JMenuBar();
+        jmProducts = new javax.swing.JMenu();
+        jmiNewProduct = new javax.swing.JMenuItem();
+        jmiSearchProduct = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Glavna forma");
+
+        panelUser.setBorder(javax.swing.BorderFactory.createTitledBorder("User"));
+
+        jLabel1.setText("Current user:");
+
+        javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
+        panelUser.setLayout(panelUserLayout);
+        panelUserLayout.setHorizontalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUserLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCurrentUser, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelUserLayout.setVerticalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblCurrentUser))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jmProducts.setText("Products");
+
+        jmiNewProduct.setText("New");
+        jmProducts.add(jmiNewProduct);
+
+        jmiSearchProduct.setText("Search");
+        jmProducts.add(jmiSearchProduct);
+
+        jmbMainMenu.add(jmProducts);
+
+        setJMenuBar(jmbMainMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(panelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 109, Short.MAX_VALUE))
         );
 
         pack();
@@ -80,5 +138,18 @@ public class FrmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jmProducts;
+    private javax.swing.JMenuBar jmbMainMenu;
+    private javax.swing.JMenuItem jmiNewProduct;
+    private javax.swing.JMenuItem jmiSearchProduct;
+    private javax.swing.JLabel lblCurrentUser;
+    private javax.swing.JPanel panelUser;
     // End of variables declaration//GEN-END:variables
+    
+    private void populateCurrentUser(){
+        User user = Session.getCurrentUser();
+        lblCurrentUser.setText(user.getFirstName() + " " + user.getLastName());
+    }
+
 }

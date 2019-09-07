@@ -8,6 +8,7 @@ package form;
 import domain.User;
 import controler.Controller;
 import javax.swing.JOptionPane;
+import session.Session;
 /**
  *
  * @author stevokv
@@ -126,12 +127,12 @@ public class FrmLogIn extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String username = txtUsername.getText();
         char[] password = txtPassword.getPassword();
-        Controller controller = new Controller();
-        
+        Controller controller = new Controller();      
         try{
             User user = controller.logIn(username, String.valueOf(password));
+            Session.setCurrentUser(user);
             JOptionPane.showMessageDialog(this, "Postovani " + user.getFirstName() + ", uspesno ste se prijavili na sistem!", "Uspesno prijavljivanje!", JOptionPane.INFORMATION_MESSAGE);
-            FrmMain frmMain = new FrmMain();
+            FrmMain frmMain = new FrmMain(controller);
             this.setVisible(false);
             frmMain.setVisible(true);
         } catch (Exception ex) {

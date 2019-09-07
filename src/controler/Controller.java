@@ -6,7 +6,10 @@
 package controler;
 
 import domain.User;
+import domain.Manufacturer;
 import storage.StorageUser;
+import storage.StorageProduct;
+import storage.StorageManufacturer;
 
 import java.util.List;
 /**
@@ -15,9 +18,13 @@ import java.util.List;
  */
 public class Controller {
     private StorageUser storageUser;
+    private StorageProduct storageProduct;
+    private StorageManufacturer storageManufacturer;
 
     public Controller() {
         storageUser = new StorageUser();
+        storageProduct = new StorageProduct();
+        storageManufacturer = new StorageManufacturer();
     }
     
     public User logIn(String username, String password) throws Exception{
@@ -32,5 +39,9 @@ public class Controller {
             }
         }
         throw new Exception("Ne postoji korisnik sa unetim korisnickim imenom!");
+    }
+    
+    public List<Manufacturer> getAllManufacturers(){
+        return storageManufacturer.getAll();
     }
 }
