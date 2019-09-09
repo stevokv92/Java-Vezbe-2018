@@ -8,6 +8,7 @@ package form;
 import domain.User;
 import session.Session;
 import controler.Controller;
+import javax.swing.JDialog;
 
 /**
  *
@@ -76,6 +77,11 @@ public class FrmMain extends javax.swing.JFrame {
         jmProducts.setText("Products");
 
         jmiNewProduct.setText("New");
+        jmiNewProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNewProductActionPerformed(evt);
+            }
+        });
         jmProducts.add(jmiNewProduct);
 
         jmiSearchProduct.setText("Search");
@@ -101,6 +107,11 @@ public class FrmMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewProductActionPerformed
+        JDialog frmNewProduct = new FrmNewProduct(this, true, controller);
+        frmNewProduct.setVisible(true);
+    }//GEN-LAST:event_jmiNewProductActionPerformed
 
     /**
      * @param args the command line arguments
